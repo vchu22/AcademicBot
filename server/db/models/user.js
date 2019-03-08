@@ -24,6 +24,14 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   googleId: {
     type: Sequelize.STRING
   }
