@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, StudentInfo} from './components'
+import {Login, Signup, StudentHome, StudentInfo} from './components'
 import {me} from './store'
 
 /**
@@ -24,7 +24,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/home" component={StudentHome} />
             <Route path="/studentinfo" component={StudentInfo} />
           </Switch>
         )}
@@ -40,9 +40,9 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    // Being 'logged in' for our purposes will be defined has having a state.student that has a truthy id.
+    // Otherwise, state.student will be an empty object, and state.student.id will be falsey
+    isLoggedIn: !!state.student.id
   }
 }
 
