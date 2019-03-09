@@ -4,19 +4,19 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
+const GET_STUDENT = 'GET_STUDENT'
+const REMOVE_STUDENT = 'REMOVE_STUDENT'
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultStudent = {}
 
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getStudent = student => ({type: GET_STUDENT, student})
+const removeStudent = () => ({type: REMOVE_STUDENT})
 
 /**
  * THUNK CREATORS
@@ -24,7 +24,7 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getStudent(res.data || defaultStudent))
   } catch (err) {
     console.error(err)
   }
@@ -35,11 +35,11 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(getStudent({error: authError}))
   }
 
   try {
-    dispatch(getUser(res.data))
+    dispatch(getStudent(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -49,7 +49,7 @@ export const auth = (email, password, method) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
-    dispatch(removeUser())
+    dispatch(removeStudent())
     history.push('/login')
   } catch (err) {
     console.error(err)
@@ -59,12 +59,12 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function(state = defaultStudent, action) {
   switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return defaultUser
+    case GET_STUDENT:
+      return action.student
+    case REMOVE_STUDENT:
+      return defaultStudent
     default:
       return state
   }

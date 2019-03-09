@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const StudentHome = props => {
   const {firstname} = props
 
   return (
@@ -20,15 +20,15 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    firstname: state.user.firstname
+    firstname: state.student.firstname
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(StudentHome)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+StudentHome.propTypes = {
   email: PropTypes.string
 }

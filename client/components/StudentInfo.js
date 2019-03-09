@@ -9,7 +9,8 @@ export const StudentInfo = props => {
     lastname: 'Smith',
     major: 'Computer Science',
     gpa: 3.4,
-    coursesTaken: ['CS101', 'CS201', 'CS202']
+    coursesTaken: ['CS101', 'CS201', 'CS202'],
+    coursesTaking: ['CS203', 'ENG106', 'MATH201']
   }
   return (
     <div>
@@ -18,6 +19,12 @@ export const StudentInfo = props => {
       <p>Courses Taken</p>
       <ul>
         {info.coursesTaken.map((course, index) => (
+          <li key={index}>{course}</li>
+        ))}
+      </ul>
+      <p>Courses Taking</p>
+      <ul>
+        {info.coursesTaking.map((course, index) => (
           <li key={index}>{course}</li>
         ))}
       </ul>
