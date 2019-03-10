@@ -14,7 +14,7 @@ const Course = db.define('course', {
   dept: {
     type: Sequelize.STRING,
     validate: {
-      isIn: ['CS', 'ART', 'ENG', 'FR', 'MATH', 'BIO', 'PHYS', 'CHEM']
+      isIn: [['CS', 'ARTS', 'ENGL', 'FR', 'MATH', 'BIO', 'PHYS', 'CHEM']]
     }
   }
 })

@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {Student} = require('../server/db/models')
+const {Student, Advisor, Course} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -23,8 +23,63 @@ async function seed() {
       gpa: 2.6
     })
   ])
-
+  const advisors = await Promise.all([
+    Advisor.create({
+      firstname: 'Jennifer',
+      lastname: 'Weber',
+      available: true
+    }),
+    Advisor.create({
+      firstname: 'Simon',
+      lastname: 'Bailey',
+      available: true
+    }),
+    Advisor.create({
+      firstname: 'Vivian',
+      lastname: 'Lu',
+      available: true
+    }),
+    Advisor.create({
+      firstname: 'Robin',
+      lastname: 'Simpson',
+      available: false
+    })
+  ])
+  const courses = await Promise.all([
+    Course.create({
+      coursecode: 'CS101',
+      coursename: 'Intro to Computer Science',
+      dept: 'CS'
+    }),
+    Course.create({
+      coursecode: 'CS201',
+      coursename: 'Object-Oriented Programming with C++',
+      dept: 'CS'
+    }),
+    Course.create({
+      coursecode: 'CS202',
+      coursename: 'Object-Oriented Programming with Java',
+      dept: 'CS'
+    }),
+    Course.create({
+      coursecode: 'CS203',
+      coursename: 'Object-Oriented Programming with Python',
+      dept: 'CS'
+    }),
+    Course.create({
+      coursecode: 'ENGL106',
+      coursename: 'Basic English Writting',
+      dept: 'ENGL'
+    }),
+    Course.create({
+      coursecode: 'MATH201',
+      coursename: 'Linear Algebra I',
+      dept: 'MATH'
+    })
+  ])
   console.log(`seeded ${students.length} students`)
+  console.log(`seeded ${advisors.length} advisors`)
+  console.log(`seeded ${courses.length} courses`)
   console.log(`seeded successfully`)
 }
 
