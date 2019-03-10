@@ -4,15 +4,15 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    const student = await Student.findOne({where: {email: req.body.email}})
-    if (!student) {
+    const user = await Student.findOne({where: {email: req.body.email}})
+    if (!user) {
       console.log('No such student found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
-    } else if (!student.correctPassword(req.body.password)) {
+    } else if (!user.correctPassword(req.body.password)) {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      req.login(student, err => (err ? next(err) : res.json(student)))
+      req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
     next(err)
@@ -21,8 +21,8 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const student = await Student.create(req.body)
-    req.login(student, err => (err ? next(err) : res.json(student)))
+    const user = await Student.create(req.body)
+    req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
@@ -39,7 +39,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.student)
+  res.json(req.user)
 })
 
 router.use('/google', require('./google'))
