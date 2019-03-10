@@ -1,8 +1,7 @@
 const router = require('express').Router()
-const axios = require('axios')
 module.exports = router
 
-router.post('/', (req, res, next) => {
+router.post('/webhook', (req, res, next) => {
   try {
     const intent = req.body.queryResult.intent.displayName
     const params = req.body.queryResult.parameters

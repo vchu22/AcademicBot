@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {Student} = require('../db/models')
+const {isLoggedIn} = require('../middleware')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const students = await Student.findAll({
       // explicitly select only the id and email fields - even though
