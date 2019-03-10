@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {link} from '../secret'
 
 /**
  * COMPONENT
  */
 export const StudentHome = props => {
   const {firstname} = props
-
   return (
     <div>
       <h3>
@@ -15,6 +15,8 @@ export const StudentHome = props => {
         chatbot about academic related questions or set up an appointment with
         an academic advisor.
       </h3>
+
+      <iframe allow="microphone;" width="350" height="430" src={link} />
     </div>
   )
 }
