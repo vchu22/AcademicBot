@@ -10,7 +10,11 @@ export const StudentHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {firstname}</h3>
+      <h3>
+        Welcome to Academic Advising Center, {firstname}. Here you can ask the
+        chatbot about academic related questions or set up an appointment with
+        an academic advisor.
+      </h3>
     </div>
   )
 }
