@@ -1,4 +1,5 @@
 const Student = require('./student')
+const Advisor = require('./advisor')
 const Course = require('./course')
 const TakenCourse = require('./takenCourse')
 /**
@@ -23,5 +24,6 @@ Student.belongsToMany(Course, {through: 'coursesTaking'})
 
 module.exports = {
   Student,
+  Advisor,
   Course
 }
