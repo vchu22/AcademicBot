@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Advisor} = require('./db/models')
+const {Advisor, Appointment} = require('./db/models')
 module.exports = router
 
 router.post('/webhook', async (req, res, next) => {
@@ -45,6 +45,31 @@ async function createResponse(intent, params) {
       returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] = randomChoice(
         text
       )
+      return returnedObj
+    case 'List Available Advisers - yes':
+      let [firstname, lastname] = params.name.split(' ')
+      let time = params.time
+      console.log(firstname, lastname, time)
+      // find the advisor from database and get the id
+      let res = await Advisor.findOne({
+        where: {
+          firstname: firstname,
+          lastname: lastname
+        }
+      })
+      if (!res) {
+        returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
+          "Sorry, I wasn't able to find the advisor you mentioned."
+        return returnedObj
+      }
+      // set the appointment
+      await Appointment.create({
+        studentId: 1,
+        advisorId: 2,
+        apptime: time
+      })
+      returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
+        'I have made the appointment for you. Is there anything else I can help you with?'
       return returnedObj
     default:
       return returnedObj
