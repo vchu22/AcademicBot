@@ -23,8 +23,8 @@ Student.belongsToMany(Course, {through: 'takenCourse'})
 Course.belongsToMany(Student, {through: 'coursesTaking'})
 Student.belongsToMany(Course, {through: 'coursesTaking'})
 
-Student.belongsToMany(Advisor, {through: 'appointments'})
-Advisor.belongsToMany(Student, {through: 'appointments'})
+Student.hasMany(Appointment)
+Advisor.hasMany(Appointment)
 
 module.exports = {
   Student,

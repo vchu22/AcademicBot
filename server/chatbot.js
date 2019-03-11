@@ -10,7 +10,7 @@ router.post('/webhook', async (req, res, next) => {
     const response = await createResponse(intent, params)
     res.json(response)
   } catch (err) {
-    res.status(404).send('Not Found')
+    res.sendStatus(500)
   }
 })
 
@@ -49,7 +49,7 @@ async function createResponse(intent, params) {
     case 'List Available Advisers - yes':
       let [firstname, lastname] = params.name.split(' ')
       let time = params.time
-      console.log(firstname, lastname, time)
+      console.log(firstname, lastname, typeof time, time)
       // find the advisor from database and get the id
       let res = await Advisor.findOne({
         where: {
@@ -65,8 +65,8 @@ async function createResponse(intent, params) {
       // set the appointment
       await Appointment.create({
         studentId: 1,
-        advisorId: 2,
-        apptime: time
+        advisorId: res.dataValues.id,
+        apptime: new Date(time)
       })
       returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
         'I have made the appointment for you. Is there anything else I can help you with?'
