@@ -1,6 +1,7 @@
 const Student = require('./student')
 const Advisor = require('./advisor')
 const Course = require('./course')
+const Appointment = require('./appointment')
 const TakenCourse = require('./takenCourse')
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -22,8 +23,12 @@ Student.belongsToMany(Course, {through: 'takenCourse'})
 Course.belongsToMany(Student, {through: 'coursesTaking'})
 Student.belongsToMany(Course, {through: 'coursesTaking'})
 
+Student.belongsToMany(Advisor, {through: 'appointments'})
+Advisor.belongsToMany(Student, {through: 'appointments'})
+
 module.exports = {
   Student,
   Advisor,
-  Course
+  Course,
+  Appointment
 }
