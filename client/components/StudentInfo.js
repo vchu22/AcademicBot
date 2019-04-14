@@ -13,7 +13,7 @@ export const StudentInfo = props => {
     coursesTaking: ['CS203', 'ENG106', 'MATH201']
   }
   return (
-    <div>
+    <div className="content">
       <h3>{info.firstname + ' ' + info.lastname}</h3>
       <p>GPA: {info.gpa}</p>
       <p>Courses Taken</p>
