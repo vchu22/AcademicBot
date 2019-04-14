@@ -73,6 +73,10 @@ form div {
   display: inline-block;
 }
 
+label {
+  margin: 10px 0;
+}
+
 input {
   background-color: dimgray;
   border: 0;
