@@ -9,7 +9,7 @@ import {link} from '../secret'
 export const StudentHome = props => {
   const {firstname} = props
   return (
-    <div>
+    <div className="content">
       <h3>
         Welcome to Academic Advising Center, {firstname}. Here you can ask the
         chatbot about academic related questions or set up an appointment with
