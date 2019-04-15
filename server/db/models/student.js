@@ -38,9 +38,6 @@ const Student = db.define('student', {
       min: 0,
       max: 4
     }
-  },
-  googleId: {
-    type: Sequelize.STRING
   }
 })
 

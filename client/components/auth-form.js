@@ -17,7 +17,7 @@ const AuthForm = props => {
           <input
             name="email"
             type="text"
-            value={displayName === 'Login' ? 'cody@uni.edu' : ''}
+            placeholder={displayName === 'Login' ? 'cody@uni.edu' : ''}
           />
         </div>
         <div>
@@ -25,7 +25,7 @@ const AuthForm = props => {
           <input
             name="password"
             type="password"
-            value={displayName === 'Login' ? '123' : ''}
+            placeholder={displayName === 'Login' ? '123' : ''}
           />
         </div>
         <div>
@@ -33,7 +33,6 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
