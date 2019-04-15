@@ -3,8 +3,8 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './navbar'
-export {default as StudentHome} from './student-home'
-export {Login, Signup} from './auth-form'
+export {default as Navbar} from './Navbar'
+export {default as StudentHome} from './StudentHome'
+export {Login, Signup} from './AuthForm'
 export {StudentInfo} from './StudentInfo'
 export {default as Appointments} from './Appointments'
