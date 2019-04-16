@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const {Student} = require('../db/models')
-const {isLoggedIn} = require('../middleware')
+const {Student, Appointment, Advisor} = require('../db/models')
+const {isLoggedIn, isRightStudent} = require('../middleware')
 module.exports = router
 
 router.get('/', isLoggedIn, async (req, res, next) => {
@@ -16,3 +16,23 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     next(err)
   }
 })
+
+router.get(
+  '/appointments',
+  isLoggedIn,
+  isRightStudent,
+  async (req, res, next) => {
+    try {
+      const studentId = req.body.studentId
+      const appts = await Appointment.findAll({
+        where: {
+          studentId
+        },
+        include: [{model: Advisor}]
+      })
+      res.json(appts)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
