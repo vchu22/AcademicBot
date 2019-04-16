@@ -3,10 +3,10 @@ const db = require('../db')
 
 const CourseHistory = db.define('courseHistory', {
   grade: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     validate: {
       min: 0,
-      max: 4
+      max: 100
     }
   },
   term: {

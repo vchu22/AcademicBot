@@ -104,7 +104,7 @@ async function seed() {
     CourseHistory.create({
       studentId: 1,
       courseId: 1,
-      grade: 3.5,
+      grade: 91,
       term: 'FALL',
       year: 2018,
       status: 'TAKEN'
@@ -112,7 +112,7 @@ async function seed() {
     CourseHistory.create({
       studentId: 1,
       courseId: 5,
-      grade: 3.0,
+      grade: 85,
       term: 'FALL',
       year: 2018,
       status: 'TAKEN'
@@ -120,7 +120,7 @@ async function seed() {
     CourseHistory.create({
       studentId: 1,
       courseId: 6,
-      grade: 3.4,
+      grade: 90,
       term: 'FALL',
       year: 2018,
       status: 'TAKEN'
@@ -128,7 +128,7 @@ async function seed() {
     CourseHistory.create({
       studentId: 1,
       courseId: 2,
-      grade: 2.9,
+      grade: 77,
       term: 'SPRING',
       year: 2018,
       status: 'TAKEN'
