@@ -3,29 +3,39 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {fetchAppointmentsFromServer} from '../store'
 
-/**
- * COMPONENT
- */
+const cleanDateTimeString = str =>
+  str
+    .substring(0, 16)
+    .replace('T', ' ')
+    .replace(/-/g, '/')
+
 class Appointments extends Component {
   componentDidMount() {
     this.props.fetchAppointments(this.props.student.id)
+    console.log(this.props)
   }
   render() {
     return (
       <div className="content">
         <h2>Here is a list of appointments</h2>
+        <table id="appointments">
+          <tbody>
+            <tr>
+              <th>Advisor</th>
+              <th>Appointment Time</th>
+            </tr>
+            {this.props.appointments.map(appt => (
+              <tr key={appt.id}>
+                <td>{appt.advisor.firstname + ' ' + appt.advisor.lastname}</td>
+                <td>{cleanDateTimeString(appt.apptime)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }
 }
-
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 
 const mapState = state => {
   return {
@@ -44,9 +54,6 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(Appointments)
 
-/**
- * PROP TYPES
- */
 Appointments.propTypes = {
   appointments: PropTypes.array
 }

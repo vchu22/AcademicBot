@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Paytone+One|Sniglet:800');
+@import url('https://fonts.googleapis.com/css?family=Paytone+One|Sniglet:800|Fredoka+One');
 
 body {
-  font-family: sans-serif;
   background-color: #334353;
   color: #fff;
-  font-family: 'Paytone One', sans-serif;
 }
 
 #title {
@@ -29,6 +27,7 @@ nav {
   width: 240px;
   border-radius: 20px 0 0 20px;
   box-shadow: #000 15px 15px;
+  font-family: 'Paytone One', sans-serif;
 }
 
 nav a {
@@ -50,6 +49,7 @@ nav a:hover {
   min-height: 480px;
   padding: 20px;
   color: black;
+  font-family: 'Fredoka One', cursive;
   font-size: 24px;
   border-radius: 0 20px 20px 0;
   box-shadow: #000 15px 15px;
@@ -83,4 +83,15 @@ input {
   padding: 10px;
   font-size: 24px;
   color: #fff;
+}
+
+table#appointments {
+  margin: auto;
+}
+table#appointments th,
+table#appointments td {
+  padding: 15px 20px;
+}
+table#appointments th {
+  background-color: #3f86a1;
 }
