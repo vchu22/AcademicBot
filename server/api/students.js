@@ -17,17 +17,22 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
-router.get('/appointments', isLoggedIn, async (req, res, next) => {
-  try {
-    const studentId = req.body.studentId
-    const appts = await Appointment.findAll({
-      where: {
-        studentId
-      },
-      include: [{model: Advisor}]
-    })
-    res.json(appts)
-  } catch (err) {
-    next(err)
+router.get(
+  '/appointments',
+  isLoggedIn,
+  isRightStudent,
+  async (req, res, next) => {
+    try {
+      const studentId = req.body.studentId
+      const appts = await Appointment.findAll({
+        where: {
+          studentId
+        },
+        include: [{model: Advisor}]
+      })
+      res.json(appts)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
