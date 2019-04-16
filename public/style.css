@@ -95,3 +95,6 @@ table td {
 table th {
   background-color: #3f86a1;
 }
+iframe {
+  border: 0;
+}
