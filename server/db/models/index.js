@@ -29,9 +29,16 @@ Advisor.hasMany(Appointment)
 Appointment.belongsTo(Student)
 Appointment.belongsTo(Advisor)
 
+Student.hasMany(TakenCourse)
+Course.hasMany(TakenCourse)
+
+TakenCourse.belongsTo(Student)
+TakenCourse.belongsTo(Course)
+
 module.exports = {
   Student,
   Advisor,
   Course,
-  Appointment
+  Appointment,
+  TakenCourse
 }
