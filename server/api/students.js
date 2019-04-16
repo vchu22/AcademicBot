@@ -18,12 +18,12 @@ router.get('/', isLoggedIn, async (req, res, next) => {
 })
 
 router.get(
-  '/appointments',
+  '/:studentId/appointments',
   isLoggedIn,
   isRightStudent,
   async (req, res, next) => {
     try {
-      const studentId = req.body.studentId
+      const studentId = req.params.studentId
       const appts = await Appointment.findAll({
         where: {
           studentId
