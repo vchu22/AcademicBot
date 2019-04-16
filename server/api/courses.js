@@ -4,7 +4,7 @@ const {isLoggedIn, isRightStudent} = require('../middleware')
 module.exports = router
 
 router.get(
-  '/taken/:studentId',
+  '/:studentId',
   isLoggedIn,
   isRightStudent,
   async (req, res, next) => {
