@@ -12,7 +12,7 @@ const getAppointments = appointments => ({type: GOT_APPOINTMENTS, appointments})
 // THUNK CREATORS
 export const fetchAppointmentsFromServer = studentId => async dispatch => {
   try {
-    const res = await axios.get(`/api/students/${studentId}/appointments`)
+    const res = await axios.get(`/api/appointments/${studentId}`)
     dispatch(getAppointments(res.data))
   } catch (err) {
     console.error(err)
