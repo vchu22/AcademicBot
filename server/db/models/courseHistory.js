@@ -11,18 +11,21 @@ const CourseHistory = db.define('courseHistory', {
   },
   term: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       isIn: [['FALL', 'WINTER', 'SPRING', 'SUMMER']]
     }
   },
   year: {
     type: Sequelize.INTEGER,
+    allowNull: false,
     validate: {
       min: 1900
     }
   },
   status: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       isIn: [['TAKEN', 'TAKING']]
     }

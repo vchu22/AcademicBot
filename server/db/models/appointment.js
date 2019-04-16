@@ -3,10 +3,17 @@ const db = require('../db')
 
 const Appointment = db.define('appointments', {
   apptime: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    allowNull: false
   },
-  advisorId: Sequelize.INTEGER,
-  studentId: Sequelize.INTEGER
+  advisorId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  studentId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
 })
 
 module.exports = Appointment

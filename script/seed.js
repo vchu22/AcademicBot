@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {Student, Advisor, Course} = require('../server/db/models')
+const {
+  Student,
+  Advisor,
+  Appointment,
+  Course,
+  CourseHistory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -45,6 +51,23 @@ async function seed() {
       available: false
     })
   ])
+  const appointments = await Promise.all([
+    Appointment.create({
+      studentId: 1,
+      advisorId: 2,
+      apptime: new Date('2019-04-28 13:00:00')
+    }),
+    Appointment.create({
+      studentId: 1,
+      advisorId: 2,
+      apptime: new Date('2019-04-30 13:00:00')
+    }),
+    Appointment.create({
+      studentId: 2,
+      advisorId: 1,
+      apptime: new Date('2019-04-22 14:30:00')
+    })
+  ])
   const courses = await Promise.all([
     Course.create({
       coursecode: 'CS101',
@@ -77,9 +100,52 @@ async function seed() {
       dept: 'MATH'
     })
   ])
+  const courseHistory = await Promise.all([
+    CourseHistory.create({
+      studentId: 1,
+      courseId: 1,
+      grade: 3.5,
+      term: 'FALL',
+      year: 2018,
+      status: 'TAKEN'
+    }),
+    CourseHistory.create({
+      studentId: 1,
+      courseId: 5,
+      grade: 3.0,
+      term: 'FALL',
+      year: 2018,
+      status: 'TAKEN'
+    }),
+    CourseHistory.create({
+      studentId: 1,
+      courseId: 6,
+      grade: 3.4,
+      term: 'FALL',
+      year: 2018,
+      status: 'TAKEN'
+    }),
+    CourseHistory.create({
+      studentId: 1,
+      courseId: 2,
+      grade: 2.9,
+      term: 'SPRING',
+      year: 2018,
+      status: 'TAKEN'
+    }),
+    CourseHistory.create({
+      studentId: 1,
+      courseId: 3,
+      term: 'SPRING',
+      year: 2019,
+      status: 'TAKING'
+    })
+  ])
   console.log(`seeded ${students.length} students`)
   console.log(`seeded ${advisors.length} advisors`)
+  console.log(`seeded ${appointments.length} appointments`)
   console.log(`seeded ${courses.length} courses`)
+  console.log(`seeded ${courseHistory.length} courses taken/taking`)
   console.log(`seeded successfully`)
 }
 
