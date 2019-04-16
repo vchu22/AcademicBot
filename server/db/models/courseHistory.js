@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const TakenCourse = db.define('takenCourse', {
+const CourseHistory = db.define('courseHistory', {
   grade: {
     type: Sequelize.DECIMAL,
     validate: {
@@ -20,7 +20,13 @@ const TakenCourse = db.define('takenCourse', {
     validate: {
       min: 1900
     }
+  },
+  status: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [['TAKEN', 'TAKING']]
+    }
   }
 })
 
-module.exports = TakenCourse
+module.exports = CourseHistory

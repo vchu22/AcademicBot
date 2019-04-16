@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {TakenCourse, Course} = require('../db/models')
+const {CourseHistory, Course} = require('../db/models')
 const {isLoggedIn, isRightStudent} = require('../middleware')
 module.exports = router
 
@@ -10,13 +10,13 @@ router.get(
   async (req, res, next) => {
     try {
       const studentId = req.params.studentId
-      const takenCourses = await TakenCourse.findAll({
+      const courseHistory = await CourseHistory.findAll({
         where: {
           studentId
         },
         include: [{model: Course}]
       })
-      res.json(takenCourses)
+      res.json(courseHistory)
     } catch (err) {
       next(err)
     }

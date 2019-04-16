@@ -2,43 +2,25 @@ const Student = require('./student')
 const Advisor = require('./advisor')
 const Course = require('./course')
 const Appointment = require('./appointment')
-const TakenCourse = require('./takenCourse')
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+const CourseHistory = require('./courseHistory')
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
+Course.belongsToMany(Student, {through: 'courseHistory'})
+Student.belongsToMany(Course, {through: 'courseHistory'})
 
-Course.belongsToMany(Student, {through: 'takenCourse'})
-Student.belongsToMany(Course, {through: 'takenCourse'})
-
-Course.belongsToMany(Student, {through: 'coursesTaking'})
-Student.belongsToMany(Course, {through: 'coursesTaking'})
+Student.hasMany(CourseHistory)
+Course.hasMany(CourseHistory)
+CourseHistory.belongsTo(Student)
+CourseHistory.belongsTo(Course)
 
 Student.hasMany(Appointment)
 Advisor.hasMany(Appointment)
-
 Appointment.belongsTo(Student)
 Appointment.belongsTo(Advisor)
-
-Student.hasMany(TakenCourse)
-Course.hasMany(TakenCourse)
-
-TakenCourse.belongsTo(Student)
-TakenCourse.belongsTo(Course)
 
 module.exports = {
   Student,
   Advisor,
   Course,
   Appointment,
-  TakenCourse
+  CourseHistory
 }
