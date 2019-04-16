@@ -6,5 +6,5 @@
 export {default as Navbar} from './Navbar'
 export {default as StudentHome} from './StudentHome'
 export {Login, Signup} from './AuthForm'
-export {StudentInfo} from './StudentInfo'
+export {default as StudentInfo} from './StudentInfo'
 export {default as Appointments} from './Appointments'
