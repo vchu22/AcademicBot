@@ -16,7 +16,7 @@ export const StudentHome = props => {
         an academic advisor.
       </h3>
 
-      <iframe allow="microphone;" width="350" height="430" src={link} />
+      <iframe allow="microphone;" width="500" height="600" src={link} />
     </div>
   )
 }
