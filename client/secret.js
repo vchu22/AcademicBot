@@ -1,0 +1,2 @@
+var link = ''
+export {link}
