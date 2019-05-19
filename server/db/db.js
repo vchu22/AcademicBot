@@ -4,12 +4,10 @@ const pkg = require('../../package.json')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 const dbUsername = process.env.dbUsername
 const dbPassword = process.env.dbPassword
-
+console.log('databaseName', databaseName)
 const db = new Sequelize(
   process.env.DATABASE_URL ||
-    `postgres://${
-      dbUsername ? `${dbUsername}:${dbPassword}@` : ''
-    }localhost:5432/${databaseName}`,
+    `postgres://${dbUsername}:${dbPassword}@localhost:5432/${databaseName}`,
   {
     logging: false
   }
