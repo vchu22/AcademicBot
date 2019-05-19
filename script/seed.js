@@ -1,5 +1,5 @@
 'use strict'
-
+require('../secrets')
 const db = require('../server/db')
 const {
   Student,
