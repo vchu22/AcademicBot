@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Advisor, Appointment} = require('./db/models')
+const {Advisor, Appointment} = require('../db/models')
 module.exports = router
 
 router.post('/webhook', async (req, res, next) => {
@@ -15,19 +15,11 @@ router.post('/webhook', async (req, res, next) => {
 })
 
 async function createResponse(intent, params) {
-  let returnedObj = {
-    fulfillmentText: '',
-    fulfillmentMessages: [
-      {
-        text: {text: ['']}
-      }
-    ]
-  }
   switch (intent) {
     case 'Default Welcome Intent':
-      returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
+      return fulfillmentObjFactory(
         'Welcome to the Academic Advising Center! How can I help you?'
-      return returnedObj
+      )
     case 'List Available Advisers':
       const response = await Advisor.findAll({
         where: {
@@ -40,12 +32,9 @@ async function createResponse(intent, params) {
       const insertText = advisors.join(', ').replace(/, ([^,]*)$/, ' and $1')
       const text = [
         `Sure. We have ${insertText} available. Do you want to make an appointment with them?`,
-        `Sure. ${insertText} are available right now. Do you want to make an appointment with them?`
+        `OK. ${insertText} have some available time slots. Do you want to make an appointment with them?`
       ]
-      returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] = randomChoice(
-        text
-      )
-      return returnedObj
+      return fulfillmentObjFactory(randomChoice(text))
     case 'List Available Advisers - yes':
       let [firstname, lastname] = params.name.split(' ')
       let time = params.time
@@ -58,9 +47,9 @@ async function createResponse(intent, params) {
         }
       })
       if (!res) {
-        returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
+        return fulfillmentObjFactory(
           "Sorry, I wasn't able to find the advisor you mentioned."
-        return returnedObj
+        )
       }
       // set the appointment
       await Appointment.create({
@@ -68,14 +57,35 @@ async function createResponse(intent, params) {
         advisorId: res.dataValues.id,
         apptime: new Date(time)
       })
-      returnedObj.fulfillmentText = returnedObj.fulfillmentMessages[0].text.text[0] =
+      return fulfillmentObjFactory(
         'I have made the appointment for you. Is there anything else I can help you with?'
-      return returnedObj
+      )
     default:
-      return returnedObj
+      return fulfillmentObjFactory()
+  }
+}
+
+function fulfillmentObjFactory(text = '') {
+  /**
+   * A factory function that returns a fulfillment object in a format that Dialogflow server can understand
+   * @param {string} text   A string representing the message to be displayed to the user
+   * @return {object}       An object that will be returned to the Dialogflow server
+   */
+  return {
+    fulfillmentText: text,
+    fulfillmentMessages: [
+      {
+        text: {text: [text]}
+      }
+    ]
   }
 }
 
 function randomChoice(arr) {
+  /**
+   * A function that randomly select a choice within an array
+   * @param {array} arr An array containing all the possible responses for a given intent
+   * @return {string}   A string representing the choice
+   */
   return arr[Math.floor(Math.random() * arr.length)]
 }
