@@ -4,7 +4,12 @@ In a busy academic advising center of an university, students are frustrated tha
 
 Using a chatbot, we can save time for both the students and the staffs.
 
-### Running the application
+### Testing the demo
+To simply see a live demo of this application, go to [this site](https://academic-center-chatbot.herokuapp.com/) and use the following credentials to log in:
+- Email: `cody@uni.edu`
+- Password: `123`
+
+### Running the application on your machine
 
 To start the application, you need first have a Postgres database named "1901-gh-stackathon" and another databse named "1901-gh-stackathon." Then, you follow the following steps:
 
